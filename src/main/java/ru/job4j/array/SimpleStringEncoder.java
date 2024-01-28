@@ -4,13 +4,13 @@ public class SimpleStringEncoder {
     public static String encode(String input) {
         String result = "";
         char symbol = input.charAt(0);
-        int counter = 1;
+        int counter = 0;
         char[] symbols = input.toCharArray();
 
-        for (int i = 1; i < symbols.length; i++) {
-            if (symbols[i] != symbol) {
+        for (char ch : symbols) {
+            if (ch != symbol) {
                 result = getResult(result, symbol, counter);
-                symbol = symbols[i];
+                symbol = ch;
                 counter = 1;
             } else {
                 counter++;
