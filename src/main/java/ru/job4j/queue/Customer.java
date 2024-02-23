@@ -3,13 +3,13 @@ package ru.job4j.queue;
 import java.util.Objects;
 
 public record Customer(String name, int amount) {
-
     @Override
     public String toString() {
         return "Customer{"
                 + "name='" + name + '\''
                 + '}';
     }
+
     @Override
     public String name() {
         return this.name;
