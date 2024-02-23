@@ -7,21 +7,18 @@ public class ReconstructPhrase {
 
     private final Deque<Character> evenElements;
 
-    private StringBuilder stringBuilder = new StringBuilder();
-
-    private StringBuilder getStringBuilder = new StringBuilder();
-
     public ReconstructPhrase(Deque<Character> descendingElements, Deque<Character> evenElements) {
         this.descendingElements = descendingElements;
         this.evenElements = evenElements;
     }
 
     private String getEvenElements() {
+        StringBuilder stringBuilder = new StringBuilder();
         while (evenElements.size() > 0) {
-            for (int i = 0; i < evenElements.size() - 1; i++) {
+            for (int i = 0; i < evenElements.size(); i++) {
                 if (i % 2 == 0) {
                     stringBuilder.append(evenElements.pollFirst());
-                    evenElements.poll();
+                    evenElements.pollFirst();
                 }
             }
         }
@@ -29,10 +26,11 @@ public class ReconstructPhrase {
     }
 
     private String getDescendingElements() {
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = descendingElements.size(); i > 0; i--) {
-            getStringBuilder.append(descendingElements.pollLast());
+            stringBuilder.append(descendingElements.pollLast());
         }
-        return getStringBuilder.toString();
+        return stringBuilder.toString();
     }
 
     public String getReconstructPhrase() {
