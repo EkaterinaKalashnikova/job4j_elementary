@@ -23,7 +23,6 @@ class AppleStoreTest {
         String customer = appleStore.getLastHappyCustomer();
         assertThat(customer).isEqualTo("Customer{name='Alexei'}");
     }
-
     @Test
     void whenGetFirst() {
         Queue<Customer> customers = new LinkedList<>();
