@@ -11,11 +11,6 @@ public record Customer(String name, int amount) {
     }
 
     @Override
-    public String name() {
-        return this.name;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -30,5 +25,15 @@ public record Customer(String name, int amount) {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String name() {
+        return name;
+    }
+
+    @Override
+    public int amount() {
+        return amount;
     }
 }
