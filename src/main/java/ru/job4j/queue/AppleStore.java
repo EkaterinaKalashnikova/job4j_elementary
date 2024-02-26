@@ -2,7 +2,7 @@ package ru.job4j.queue;
 
 import java.util.Queue;
 
-public class AppleStore<Customer> {
+public class AppleStore {
     private final Queue<Customer> queue;
     private final int count;
 
@@ -16,7 +16,7 @@ public class AppleStore<Customer> {
         for (int i = 0; i < count; i++) {
             customer = queue.poll();
         }
-        return customer.toString();
+        return customer.name();
     }
 
     public String getFirstUpsetCustomer() {
@@ -24,7 +24,7 @@ public class AppleStore<Customer> {
         for (int i = 0; i <= count; i++) {
             customer = queue.poll();
         }
-        return customer.toString();
+        return customer.name();
     }
 }
 

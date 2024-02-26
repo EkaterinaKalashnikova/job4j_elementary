@@ -21,7 +21,7 @@ class AppleStoreTest {
         int count = 4;
         AppleStore appleStore = new AppleStore(customers, count);
         String customer = appleStore.getLastHappyCustomer();
-        assertThat(customer).isEqualTo("Customer{name='Alexei'}");
+        assertThat(customer).isEqualTo("Alexei");
     }
 
     @Test
@@ -37,6 +37,6 @@ class AppleStoreTest {
         int count = 4;
         AppleStore appleStore = new AppleStore(customers, count);
         String customer = appleStore.getFirstUpsetCustomer();
-        assertThat(customer).isEqualTo("Customer{name='Iryna'}");
+        assertThat(customer).isEqualTo("Iryna");
     }
 }
