@@ -42,13 +42,15 @@ public record AnalyzeByMap() {
     private static void search(List<Pupil> pupils, Map<String, Integer> maps) {
         for (Pupil pupil : pupils) {
             for (Subject sub : pupil.subjects()) {
-                Integer sum = maps.get(sub.name());
+           /*    Integer sum = maps.get(sub.name());
                 if (sum == null) {
                     sum = sub.score();
-                } else {
-                    sum += sub.score();
+               } else {
+                   sum += sub.score();
                 }
-                maps.put(sub.name(), sum);
+/               maps.put(sub.name(), sum);**/
+                Integer sum = maps.getOrDefault(sub.name(), 0);
+                maps.put(sub.name(), sum + sub.score());
             }
         }
     }
