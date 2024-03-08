@@ -43,7 +43,8 @@ public record AnalyzeByMap() {
     private static void search(List<Pupil> pupils, Map<String, Integer> maps) {
         for (Pupil pupil : pupils) {
             for (Subject sub : pupil.subjects()) {
-                maps.put(sub.name(), maps.getOrDefault(sub.name(), 0) + sub.score());
+                /*maps.put(sub.name(), maps.getOrDefault(sub.name(), 0) + sub.score());**/
+                maps.merge(sub.name(), sub.score(), Integer::sum);
             }
         }
     }
