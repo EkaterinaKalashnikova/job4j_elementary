@@ -11,13 +11,23 @@ public class Card {
         this.value = value;
     }
 
+    public Card(String string, String string1) {
+        this.suit = Suit.valueOf(string);
+        this.value = Value.valueOf(string1);
+    }
+
     public static void main(String[] args) {
         Stream.of(Suit.values())
-                .flatMap(suit -> {
-                    return Stream.of(Value.values())
-                            .map(value -> suit + " " + value);
-                })
+                .flatMap(suit -> Stream.of(Value.values())
+                        .map(value -> new Card(suit.toString(), value.toString())))
                 .forEach(System.out::println);
     }
-}
 
+    @Override
+    public String toString() {
+        return "Card{"
+                + "suit=" + suit
+                + ", value=" + value
+                + '}';
+    }
+}
