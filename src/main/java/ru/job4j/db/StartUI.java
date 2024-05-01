@@ -30,7 +30,7 @@ public class StartUI {
         for (int i = 0; i < 1000; i++) {
             Thread.sleep(100);
             Item item = new Item("Ekaterina" + i, i + "");
-            //boolean items = actions.add(item);
+            /**boolean items = actions.add(item);*/
             System.out.println(item);
             System.out.println(i);
         }
