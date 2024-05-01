@@ -16,7 +16,7 @@ public class SqlTracker implements Store, AutoCloseable  {
     }
 
     public void init() {
-        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("db/liquibase.properties")) {
+        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("db/scripts/liquibase.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
