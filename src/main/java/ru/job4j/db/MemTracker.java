@@ -48,7 +48,7 @@ public class MemTracker {
      */
     public boolean replace(String id, Item item) {
         item.setId(id);
-        for (int i  = 0; i < items.size(); i++) {
+        for (int i = 0; i < items.size(); i++) {
             if (id.equals(items.get(i).getId())) {
                 items.set(i, item);
                 return true;
@@ -62,14 +62,12 @@ public class MemTracker {
      *
      * @return если успешно, то вернуть true
      */
-    public boolean delete(String id) {
+    public void delete(String id) {
         for (int i = 0; i < items.size(); i++) {
             if (id.equals(this.items.get(i).getId())) {
                 items.remove(i);
-                return true;
             }
         }
-        return false;
     }
 
     /**

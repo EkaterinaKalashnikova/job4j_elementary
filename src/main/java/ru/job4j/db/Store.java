@@ -10,7 +10,7 @@ public interface Store extends AutoCloseable {
 
     boolean replace(String id, Item item);
 
-    boolean delete(String id);
+    void delete(String id);
 
     List<Item> findAll();
 
@@ -27,7 +27,7 @@ public interface Store extends AutoCloseable {
             UserAction[] actions = {
                     new CreateAction()
             };
-            new StartUI().init(validate, tracker, actions);
+           new StartUI().init(validate, tracker, actions);
         } catch (Exception e) {
             e.printStackTrace();
         }

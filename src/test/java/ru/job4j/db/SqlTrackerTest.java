@@ -4,19 +4,16 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.job4j.db.Item;
 
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class SqlTrackerTest {
 
@@ -62,47 +59,61 @@ public class SqlTrackerTest {
     @Test
     public void add() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("Рихтовка", "0");
-        Item item1 = tracker.add(item);
-        List<Item> itemList = tracker.findAll();
-        assertTrue(itemList.contains(item1));
+        Item item = tracker.add(new Item("name"));
+        Item rsl = tracker.findById(item.getId());
+        assertThat(rsl.getId()).isEqualTo(item.getId());
+        assertThat(rsl.getName()).isEqualTo(item.getName());
+        assertThat(tracker.findByName("name").size()).isEqualTo(1);
     }
 
     @Test
     public void replace() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("Замена масла", "0");
-        boolean b = tracker.replace("6", item);
-        List<Item> itemList = tracker.findAll();
-        assertEquals(itemList.contains(b), itemList.contains(6));
+        Item item = tracker.add(new Item("name"));
+        Item replacement = new Item("new name", item.getId());
+        tracker.replace(item.getId(), replacement);
+        Item result = tracker.findById(item.getId());
+        assertThat(replacement.getName()).isEqualTo(result.getName());
+        assertThat(replacement.getId()).isEqualTo(result.getId());
     }
 
     @Test
     public void delete() {
         SqlTracker tracker = new SqlTracker(connection);
-        boolean b = tracker.delete("7");
-        List<Item> itemList = tracker.findAll();
-        assertFalse(itemList.contains(b));
+        Item item = tracker.add(new Item("name"));
+        Item result = tracker.findById(item.getId());
+        assertThat(item.getName()).isEqualTo(result.getName());
+        assertThat(item.getId()).isEqualTo(result.getId());
     }
 
     @Test
     public void findAll() {
         SqlTracker tracker = new SqlTracker(connection);
-        List<Item> all = tracker.findAll();
-        all.forEach(System.out::println);
+        Item[] items = new Item[2];
+        items[0] = tracker.add(new Item("name", "1"));
+        items[1] = tracker.add(new Item("name1", "2"));
+        Item[] rsl = tracker.findAll().toArray(new Item[0]);
+        for (int i = 0; i < items.length; i++) {
+            System.out.println(Arrays.toString(rsl));
+            System.out.println();
+        }
     }
 
     @Test
     public void findByName() {
         SqlTracker tracker = new SqlTracker(connection);
-        List<Item> byName = tracker.findByName("Рихтовка");
-        byName.forEach(System.out::println);
+        Item item = tracker.add(new Item("name", "1"));
+        Item[] rsl = tracker.findByName("name").toArray(new Item[0]);
+        assertThat(rsl[0].getId()).isEqualTo(item.getId());
+        assertThat(rsl[0].getName()).isEqualTo(item.getName());
     }
 
     @Test
     public void findById() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item byId = tracker.findById("7");
+        Item item = tracker.add(new Item("name", "1"));
+        Item byId = tracker.findById(item.getId());
         System.out.println(byId);
+        assertThat(byId).isEqualTo(item);
     }
 }
