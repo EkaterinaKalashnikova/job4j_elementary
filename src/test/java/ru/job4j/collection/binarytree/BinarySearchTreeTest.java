@@ -62,7 +62,7 @@ class BinarySearchTreeTest {
     @Test
     void whenAddMinimumIsNotEndThenOk() {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
-        for (int element : new int[]{4, 2, 6, 3, 5, 7 }) {
+        for (int element : new int[]{4, 2, 6, 3, 5, 7}) {
             tree.put(element);
         }
         assertThat(tree.minimum()).isEqualTo(2);
@@ -96,5 +96,16 @@ class BinarySearchTreeTest {
         }
         assertThat(tree.inPostOrder()).hasSize(7)
                 .containsExactly(1, 3, 2, 5, 7, 6, 4);
+    }
+
+    @Test
+    void whenClearThenOk() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        for (int element : new int[]{5, 10, 15, 20, 25}) {
+            tree.put(element);
+        }
+        System.out.println("Before clear: " + tree.inPostOrder().size());
+        tree.clear();
+        System.out.println("After clear: " + tree.inPostOrder().size());
     }
 }
