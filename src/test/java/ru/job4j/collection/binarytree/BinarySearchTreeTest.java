@@ -107,5 +107,6 @@ class BinarySearchTreeTest {
         System.out.println("Before clear: " + tree.inPostOrder().size());
         tree.clear();
         System.out.println("After clear: " + tree.inPostOrder().size());
+        assertThat(tree.inPostOrder()).hasSize(0).containsExactly();
     }
 }
