@@ -8,16 +8,15 @@ import static org.assertj.core.api.Assertions.*;
 
 class AvlTreeTest {
 
-    /**
-     * @Test void simmetricalOrderIsOk() {
-     * AvlTree<Integer> tree = new AvlTree<>();
-     * for (int i = 1; i < 8; i++) {
-     * tree.insert(i);
-     * }
-     * List<Integer> list = tree.inSymmetricalOrder();
-     * assertThat(list).containsExactly(1, 2, 3, 4, 5, 6, 7);
-     * }
-     */
+    @Test
+    void simmetricalOrderIsOk() {
+        AvlTree<Integer> tree = new AvlTree<>();
+        for (int i = 1; i < 8; i++) {
+            tree.insert(i);
+        }
+        List<Integer> list = tree.inSymmetricalOrder();
+        assertThat(list).containsExactly(1, 2, 3, 4, 5, 6, 7);
+    }
 
     @Test
     void insertAndRemoveWorksCorrectly() {
@@ -35,15 +34,14 @@ class AvlTreeTest {
         assertThat(list).containsExactly(5, 20);
     }
 
-    /**
-     * @Test void searchForNonExistingElementReturnsFalse() {
-     * AvlTree<Integer> tree = new AvlTree<>();
-     * tree.insert(1);
-     * tree.insert(2);
-     * tree.insert(3);
-     * assertThat(tree.contains(10)).isFalse();
-     * }
-     */
+    @Test
+    void searchForNonExistingElementReturnsFalse() {
+        AvlTree<Integer> tree = new AvlTree<>();
+        tree.insert(1);
+        tree.insert(2);
+        tree.insert(3);
+        assertThat(tree.contains(10)).isFalse();
+    }
 
     @Test
     void minimumElementIsCorrect() {
@@ -74,27 +72,29 @@ class AvlTreeTest {
         assertThat(list).containsExactly(10);
     }
 
-    /** @Test void treeBalancesAfterInsertion() {
-    AvlTree<Integer> tree = new AvlTree<>();
-    tree.insert(10);
-    tree.insert(20);
-    tree.insert(5);
-    tree.insert(30);
-    tree.insert(25);
-    List<Integer> list = tree.inSymmetricalOrder();
-    assertThat(list).containsExactly(5, 10, 20, 25, 30);
-    }*/
+    @Test
+    void treeBalancesAfterInsertion() {
+        AvlTree<Integer> tree = new AvlTree<>();
+        tree.insert(10);
+        tree.insert(20);
+        tree.insert(5);
+        tree.insert(30);
+        tree.insert(25);
+        List<Integer> list = tree.inSymmetricalOrder();
+        assertThat(list).containsExactly(5, 10, 20, 25, 30);
+    }
 
-    /**  @Test void treeBalancesAfterDeletion() {
-    AvlTree<Integer> tree = new AvlTree<>();
-    tree.insert(10);
-    tree.insert(20);
-    tree.insert(5);
-    tree.insert(30);
-    tree.insert(25);
-    tree.remove(20);
-    List<Integer> list = tree.inSymmetricalOrder();
-    assertThat(list).containsExactly(5, 10, 25, 30);
-    }*/
+    @Test
+    void treeBalancesAfterDeletion() {
+        AvlTree<Integer> tree = new AvlTree<>();
+        tree.insert(10);
+        tree.insert(20);
+        tree.insert(5);
+        tree.insert(30);
+        tree.insert(25);
+        tree.remove(20);
+        List<Integer> list = tree.inSymmetricalOrder();
+        assertThat(list).containsExactly(5, 10, 25, 30);
+    }
 }
     
